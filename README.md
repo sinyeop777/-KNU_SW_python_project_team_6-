@@ -6,3 +6,11 @@
 4. 모델링 및 분석: Scikit-Learn(sklearn)사용, 머신러닝 모델 학습, 분류 모델 예제
 5. 결과 시각화 및 인사이트 노출: 실제 값과 예측 값 비교, 모델 성능 평가
 6. 생성형 AI와의 추론 비교: 사람이 만든 수학적 모델 vs 언어 모델(GPT), 예상 OPENAPI는 결과를 기반으로 인과관계나 정치적 맥락을 도출해낼 수 있을거라 예상  
+
+📁 대통령 예측 프로그램/
+├── main_gui.py              # Tkinter 기반 메인 인터페이스
+├── eda_analysis.py          # 탐색적 데이터 분석 (DB + Excel + 시각화)
+├── model_training.py        # 머신러닝 모델 구축 및 예측
+├── /data/
+│   ├── elec_result.xlsx     # 실제 지지율 데이터
+│   └── pp1.sql 또는 MySQL    # 여론조사 데이터
