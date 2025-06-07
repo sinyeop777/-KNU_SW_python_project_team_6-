@@ -19,7 +19,7 @@ def get_processed_data():
     print("▶ 탐색적 데이터 분석 시작 중...\n")
 
     # ✅ MySQL 연결
-    engine = create_engine("mysql+mysqlconnector://root:cks3148@127.0.0.1:3306/pp")
+    engine = create_engine("mysql+mysqlconnector://root:hanover109%40%40@127.0.0.1:3306/pp")
     poll_df = pd.read_sql("SELECT * FROM pp1", engine)
 
     # ✅ 엑셀 불러오기
