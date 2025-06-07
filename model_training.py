@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 import matplotlib.font_manager as fm
 from sqlalchemy import create_engine
 from sklearn.linear_model import LinearRegression
@@ -18,7 +19,7 @@ def get_processed_data():
     print("▶ 탐색적 데이터 분석 시작 중...\n")
 
     # ✅ MySQL 연결
-    engine = create_engine("mysql+mysqlconnector://root:hanover109%40%40@127.0.0.1:3306/pp")
+    engine = create_engine("mysql+mysqlconnector://root:cks3148@127.0.0.1:3306/pp")
     poll_df = pd.read_sql("SELECT * FROM pp1", engine)
 
     # ✅ 엑셀 불러오기
@@ -77,6 +78,25 @@ def run(model_type="LinearRegression"):
     plt.title(f"21대 대선 후보 예측 지지율 ({model_type})")
     plt.tight_layout()
     plt.show()
+    
+    pred_df = last_test[['elec_num','cand_num','cand_name']].copy()
+    pred_df['pred_rate'] = y_pred
+
+    actual_df = pd.read_csv("2025_prediction_results.csv")
+    actual_df = actual_df[['elec_num','cand_num','cand_name','final_rate']] \
+                     .rename(columns={'final_rate':'actual_rate'})
+
+    save_df = pd.merge(actual_df, pred_df,
+                       on=['elec_num','cand_num','cand_name'])
+
+    os.makedirs("data", exist_ok=True)
+
+    csv_path = "data/predictions_latest.csv"
+    json_path = "data/predictions_latest.json"
+    save_df.to_csv(csv_path, index=False, encoding='utf-8-sig')
+    save_df.to_json(json_path, orient='records', force_ascii=False, indent=2)
+
+    print(f"\n▶ 결과를 저장 했습니다: {csv_path}, {json_path}")
 
 if __name__ == "__main__":
     run()
