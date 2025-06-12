@@ -2,7 +2,7 @@ import pandas as pd
 import openai
 
 # Hard coded OpenAI API key
-openai.api_key =  " "
+openai.api_key = "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"
 
 import pandas as pd
 import openai
